@@ -1,0 +1,84 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://www.trebeyainterview.com/spring-boot-soap"
+           targetNamespace="http://www.trebeyainterview.com/spring-boot-soap"
+           elementFormDefault="qualified">
+
+    <xs:element name="getAccountRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="account_no" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAccountResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="account" type="tns:account" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="account">
+        <xs:sequence>
+            <xs:element name="user_id" type="xs:string" />
+            <xs:element name="account_no" type="xs:string" />
+            <xs:element name="balance" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="getBalanceRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user_id" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getBalanceResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="balance" type="xs:double" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ownAccountTransferRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ownTransferInput" type="tns:ownTransferInput" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="ownTransferInput">
+        <xs:sequence>
+            <xs:element name="user_id" type="xs:string" />
+            <xs:element name="from_account" type="xs:string" />
+            <xs:element name="to_account" type="xs:string" />
+            <xs:element name="amount" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="ownAccountTransferResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ownTransferOutput" type="tns:ownTransferOutput" />
+
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="ownTransferOutput">
+        <xs:sequence>
+            <xs:element name="user_id" type="xs:string" />
+            <xs:element name="from_account" type="xs:string" />
+            <xs:element name="to_account" type="xs:string" />
+            <xs:element name="amount" type="xs:double" />
+            <xs:element name="from_balance" type="xs:double" />
+            <xs:element name="to_balance" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
+
+
+</xs:schema>
