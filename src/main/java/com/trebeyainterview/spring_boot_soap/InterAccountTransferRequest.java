@@ -11,22 +11,23 @@ package com.trebeyainterview.spring_boot_soap;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for account complex type.
+ * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="account"&gt;
+ * &lt;complexType&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="user_id" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="account_no" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="balance" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
+ *         &lt;element name="from_account" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="to_account" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -36,81 +37,82 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "account", propOrder = {
-    "userId",
-    "accountNo",
-    "balance"
+@XmlType(name = "", propOrder = {
+    "fromAccount",
+    "toAccount",
+    "amount"
 })
-public class Account {
+@XmlRootElement(name = "interAccountTransferRequest")
+public class InterAccountTransferRequest {
 
-    @XmlElement(name = "user_id", required = true)
-    protected String userId;
-    @XmlElement(name = "account_no", required = true)
-    protected String accountNo;
-    protected double balance;
+    @XmlElement(name = "from_account", required = true)
+    protected String fromAccount;
+    @XmlElement(name = "to_account", required = true)
+    protected String toAccount;
+    protected double amount;
 
     /**
-     * Gets the value of the userId property.
+     * Gets the value of the fromAccount property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getUserId() {
-        return userId;
+    public String getFromAccount() {
+        return fromAccount;
     }
 
     /**
-     * Sets the value of the userId property.
+     * Sets the value of the fromAccount property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setUserId(String value) {
-        this.userId = value;
+    public void setFromAccount(String value) {
+        this.fromAccount = value;
     }
 
     /**
-     * Gets the value of the accountNo property.
+     * Gets the value of the toAccount property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getAccountNo() {
-        return accountNo;
+    public String getToAccount() {
+        return toAccount;
     }
 
     /**
-     * Sets the value of the accountNo property.
+     * Sets the value of the toAccount property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setAccountNo(String value) {
-        this.accountNo = value;
+    public void setToAccount(String value) {
+        this.toAccount = value;
     }
 
     /**
-     * Gets the value of the balance property.
+     * Gets the value of the amount property.
      * 
      */
-    public double getBalance() {
-        return balance;
+    public double getAmount() {
+        return amount;
     }
 
     /**
-     * Sets the value of the balance property.
+     * Sets the value of the amount property.
      * 
      */
-    public void setBalance(double value) {
-        this.balance = value;
+    public void setAmount(double value) {
+        this.amount = value;
     }
 
 }

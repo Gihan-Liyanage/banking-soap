@@ -16,11 +16,11 @@ import org.springframework.xml.xsd.XsdSchema;
 @Configuration
 public class SoapWebServiceConfig extends WsConfigurerAdapter {
     @Bean
-    public ServletRegistrationBean messageDispatcherServlet(ApplicationContext context) {
+    public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext context) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
         servlet.setApplicationContext(context);
         servlet.setTransformWsdlLocations(true);
-        return new ServletRegistrationBean(servlet, "/account/*");
+        return new ServletRegistrationBean<>(servlet, "/account/*");
     }
 
 
@@ -39,15 +39,39 @@ public class SoapWebServiceConfig extends WsConfigurerAdapter {
         definition.setTargetNamespace("http://www.trebeyainterview.com/spring-boot-soap");
         return definition;
     }
-//
-//    @Bean(name = "total")
-//    public DefaultWsdl11Definition defaultWsdl11Definition2(XsdSchema accountsSchema) {
-//
-//        DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
-//        definition.setSchema(accountsSchema);
-//        definition.setLocationUri("/account");
-//        definition.setPortTypeName("AccountServicePort");
-//        definition.setTargetNamespace("http://www.trebeyainterview.com/spring-boot-soap");
-//        return definition;
-//    }
+
+    @Bean(name = "total")
+    public DefaultWsdl11Definition defaultWsdl11Definition2(XsdSchema accountsSchema) {
+
+        DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
+        definition.setSchema(accountsSchema);
+        definition.setLocationUri("/account");
+        definition.setPortTypeName("AccountServicePort");
+        definition.setTargetNamespace("http://www.trebeyainterview.com/spring-boot-soap");
+        return definition;
+    }
+
+    @Bean(name = "transfer")
+    public DefaultWsdl11Definition defaultWsdl11Definition3(XsdSchema accountsSchema) {
+
+        DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
+        definition.setSchema(accountsSchema);
+        definition.setLocationUri("/account");
+        definition.setPortTypeName("AccountServicePort");
+        definition.setTargetNamespace("http://www.trebeyainterview.com/spring-boot-soap");
+        return definition;
+    }
+
+    @Bean(name = "interAccount")
+    public DefaultWsdl11Definition defaultWsdl11Definition4(XsdSchema accountsSchema) {
+
+        DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
+        definition.setSchema(accountsSchema);
+        definition.setLocationUri("/account");
+        definition.setPortTypeName("AccountServicePort");
+        definition.setTargetNamespace("http://www.trebeyainterview.com/spring-boot-soap");
+        return definition;
+    }
+
+
 }

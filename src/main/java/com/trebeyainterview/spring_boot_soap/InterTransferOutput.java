@@ -11,24 +11,24 @@ package com.trebeyainterview.spring_boot_soap;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for interTransferOutput complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType&gt;
+ * &lt;complexType name="interTransferOutput"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="user_id" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="from_account" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="to_account" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
+ *         &lt;element name="from_balance" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
+ *         &lt;element name="to_balance" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -38,46 +38,24 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "userId",
+@XmlType(name = "interTransferOutput", propOrder = {
     "fromAccount",
     "toAccount",
-    "amount"
+    "amount",
+    "fromBalance",
+    "toBalance"
 })
-@XmlRootElement(name = "ownAccountTransferRequest")
-public class OwnAccountTransferRequest {
+public class InterTransferOutput {
 
-    @XmlElement(name = "user_id", required = true)
-    protected String userId;
     @XmlElement(name = "from_account", required = true)
     protected String fromAccount;
     @XmlElement(name = "to_account", required = true)
     protected String toAccount;
     protected double amount;
-
-    /**
-     * Gets the value of the userId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getUserId() {
-        return userId;
-    }
-
-    /**
-     * Sets the value of the userId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setUserId(String value) {
-        this.userId = value;
-    }
+    @XmlElement(name = "from_balance")
+    protected double fromBalance;
+    @XmlElement(name = "to_balance")
+    protected double toBalance;
 
     /**
      * Gets the value of the fromAccount property.
@@ -141,6 +119,38 @@ public class OwnAccountTransferRequest {
      */
     public void setAmount(double value) {
         this.amount = value;
+    }
+
+    /**
+     * Gets the value of the fromBalance property.
+     * 
+     */
+    public double getFromBalance() {
+        return fromBalance;
+    }
+
+    /**
+     * Sets the value of the fromBalance property.
+     * 
+     */
+    public void setFromBalance(double value) {
+        this.fromBalance = value;
+    }
+
+    /**
+     * Gets the value of the toBalance property.
+     * 
+     */
+    public double getToBalance() {
+        return toBalance;
+    }
+
+    /**
+     * Sets the value of the toBalance property.
+     * 
+     */
+    public void setToBalance(double value) {
+        this.toBalance = value;
     }
 
 }

@@ -46,19 +46,13 @@
     <xs:element name="ownAccountTransferRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="ownTransferInput" type="tns:ownTransferInput" />
+                <xs:element name="user_id" type="xs:string" />
+                <xs:element name="from_account" type="xs:string" />
+                <xs:element name="to_account" type="xs:string" />
+                <xs:element name="amount" type="xs:double" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
-    <xs:complexType name="ownTransferInput">
-        <xs:sequence>
-            <xs:element name="user_id" type="xs:string" />
-            <xs:element name="from_account" type="xs:string" />
-            <xs:element name="to_account" type="xs:string" />
-            <xs:element name="amount" type="xs:double" />
-        </xs:sequence>
-    </xs:complexType>
 
     <xs:element name="ownAccountTransferResponse">
         <xs:complexType>
@@ -80,5 +74,32 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:element name="interAccountTransferRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="from_account" type="xs:string" />
+                <xs:element name="to_account" type="xs:string" />
+                <xs:element name="amount" type="xs:double" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="interAccountTransferResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="interTransferOutput" type="tns:interTransferOutput" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="interTransferOutput">
+        <xs:sequence>
+            <xs:element name="from_account" type="xs:string" />
+            <xs:element name="to_account" type="xs:string" />
+            <xs:element name="amount" type="xs:double" />
+            <xs:element name="from_balance" type="xs:double" />
+            <xs:element name="to_balance" type="xs:double" />
+        </xs:sequence>
+    </xs:complexType>
 
 </xs:schema>

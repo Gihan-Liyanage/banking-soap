@@ -23,7 +23,6 @@ public class AccountEndpoint {
         return response;
     }
 
-
     @PayloadRoot(namespace = "http://www.trebeyainterview.com/spring-boot-soap",
         localPart = "getBalanceRequest")
     @ResponsePayload
@@ -35,11 +34,20 @@ public class AccountEndpoint {
     }
 
     @PayloadRoot(namespace = "http://www.trebeyainterview.com/spring-boot-soap",
+            localPart = "interAccountTransferRequest")
+    @ResponsePayload
+    public InterAccountTransferResponse interAccountTransferResponse(@RequestPayload InterAccountTransferRequest request){
+        InterAccountTransferResponse response = new InterAccountTransferResponse();
+        response.setInterTransferOutput(accountService.interAccountTransfer(request));
+        return  response;
+    }
+
+    @PayloadRoot(namespace = "http://www.trebeyainterview.com/spring-boot-soap",
             localPart = "ownAccountTransferRequest")
     @ResponsePayload
     public OwnAccountTransferResponse ownAccountTransferResponse(@RequestPayload OwnAccountTransferRequest request){
         OwnAccountTransferResponse response = new OwnAccountTransferResponse();
-        response.setOwnTransferOutput(accountService.ownAccountTransfer(request.getOwnTransferInput()));
+        response.setOwnTransferOutput(accountService.ownAccountTransfer(request));
         return  response;
     }
 }

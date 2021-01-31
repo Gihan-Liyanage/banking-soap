@@ -1,8 +1,7 @@
 package com.coreBankDummy.demo.service;
 
-import com.trebeyainterview.spring_boot_soap.Account;
-import com.trebeyainterview.spring_boot_soap.OwnTransferInput;
-import com.trebeyainterview.spring_boot_soap.OwnTransferOutput;
+
+import com.trebeyainterview.spring_boot_soap.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +14,7 @@ public class AccountService {
     private static final Map<String, Account> accounts = new HashMap<>();
 
     @PostConstruct
-    public void initiate(){
+    public void initiate() {
         Account ac1 = new Account();
         ac1.setUserId("111");
         ac1.setAccountNo("123123123");
@@ -45,51 +44,77 @@ public class AccountService {
         accounts.put(ac4.getAccountNo(), ac4);
     }
 
-    public Account getAccounts(String accountNumber){
+    /**
+     * Get account details
+     * @param accountNumber Account number of the account
+     * @return Account object (Account details) related to the given account number
+     */
+    public Account getAccounts(String accountNumber) {
         return accounts.get(accountNumber);
+
     }
 
-    public Double getAccountBalance(String userId){
+    /**
+     * Get total balance of a particular user
+     * @param userId User Id
+     * @return Total balance of all accounts owned by the given user
+     */
+    public Double getAccountBalance(String userId) {
         double totalBalance = 0;
         for (Map.Entry account : accounts.entrySet()) {
-            if(accounts.get(account.getKey()).getUserId().equals(userId)){
+            if (accounts.get(account.getKey()).getUserId().equals(userId)) {
                 totalBalance += accounts.get(account.getKey()).getBalance();
             }
         }
         return totalBalance;
     }
 
-    public OwnTransferOutput ownAccountTransfer(OwnTransferInput ownTransferInput){
+    /**
+     * Own accounts transactions
+     * @param ownAccountTransferRequest Object containing toAccountNo, fromAccountNo, userId and amount
+     * @return OwnTransferOutput object contains transaction details
+     */
+    public OwnTransferOutput ownAccountTransfer(OwnAccountTransferRequest ownAccountTransferRequest) {
         OwnTransferOutput output = new OwnTransferOutput();
-        Account toAccount = accounts.get(ownTransferInput.getToAccount());
-        Account fromAccount = accounts.get(ownTransferInput.getFromAccount());
-        System.out.println(toAccount);
-        System.out.println(fromAccount);
+        Account toAccount = accounts.get(ownAccountTransferRequest.getToAccount());
+        Account fromAccount = accounts.get(ownAccountTransferRequest.getFromAccount());
 
-        if(toAccount.getUserId().equals(fromAccount.getUserId())){
-            toAccount.setBalance(toAccount.getBalance() + ownTransferInput.getAmount());
-//            fromAccount.setBalance(fromAccount.getBalance() - ownTransferInput.getAmount());
-//            output.setFromAccount(fromAccount.getAccountNo());
-//            output.setToAccount(toAccount.getAccountNo());
-//            output.setUserId(ownTransferInput.getUserId());
-//            output.setAmount(ownTransferInput.getAmount());
-//            output.setFromBalance(fromAccount.getBalance());
-//            output.setToBalance(toAccount.getBalance());
-
-//                fromAccount.setBalance(fromAccount.getBalance() - ownTransferInput.getAmount());
+        if (toAccount.getUserId().equals(fromAccount.getUserId())) {
+            if(fromAccount.getBalance() >= ownAccountTransferRequest.getAmount()){
+                toAccount.setBalance(toAccount.getBalance() + ownAccountTransferRequest.getAmount());
+                fromAccount.setBalance(fromAccount.getBalance() - ownAccountTransferRequest.getAmount());
                 output.setFromAccount(fromAccount.getAccountNo());
                 output.setToAccount(toAccount.getAccountNo());
-                output.setUserId(ownTransferInput.getUserId());
-                output.setAmount(ownTransferInput.getAmount());
+                output.setUserId(ownAccountTransferRequest.getUserId());
+                output.setAmount(ownAccountTransferRequest.getAmount());
                 output.setFromBalance(fromAccount.getBalance());
                 output.setToBalance(toAccount.getBalance());
+            }
         }
-        output.setFromAccount("fromAccount.getAccountNo()");
-        output.setToAccount("toAccount.getAccountNo()");
-        output.setUserId("ownTransferInput.getUserId()");
-        output.setAmount(2000);
-        output.setFromBalance(3999);
-        output.setToBalance(39394);
+        return output;
+    }
+
+
+    /**
+     * Inter account transactions
+     * @param interAccountTransferRequest Object containing toAccountNo, fromAccountNo and amount
+     * @return  InterTransferOutput object contains transaction details
+     */
+    public InterTransferOutput interAccountTransfer(InterAccountTransferRequest interAccountTransferRequest) {
+        InterTransferOutput output = new InterTransferOutput();
+        Account toAccount = accounts.get(interAccountTransferRequest.getToAccount());
+        Account fromAccount = accounts.get(interAccountTransferRequest.getFromAccount());
+
+        if(fromAccount.getBalance() >= interAccountTransferRequest.getAmount()){
+            toAccount.setBalance(toAccount.getBalance() + interAccountTransferRequest.getAmount());
+            fromAccount.setBalance(fromAccount.getBalance() - interAccountTransferRequest.getAmount());
+            output.setFromAccount(fromAccount.getAccountNo());
+            output.setToAccount(toAccount.getAccountNo());
+            output.setAmount(interAccountTransferRequest.getAmount());
+            output.setFromBalance(fromAccount.getBalance());
+            output.setToBalance(toAccount.getBalance());
+        }
+
         return output;
     }
 
